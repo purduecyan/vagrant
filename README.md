@@ -13,6 +13,19 @@ sudo mkdir /etc/vbox
 sudo echo "* 172.42.42.0/24" >> /etc/vbox/networks.conf
 ```
 
+### Install and configure `kubectl`
+```shell
+# Install `kubectl` utility
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.24/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt update && sudo apt install kubectl
+
+# Setup `kubectl` for use with VMs
+vagrant ssh master -c "sudo cp /etc/kubernetes/admin.conf /vagrant"
+echo "KUBECONFIG=`pwd`/admin.conf" >> ~/.bashrc && export "KUBECONFIG=`pwd`/admin.conf"
+kubectl get nodes
+```
+
 ### Clone the repository
 To clone this repository, use:
 ```shell
