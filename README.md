@@ -18,7 +18,7 @@ sudo apt update && sudo apt install kubectl
 
 # Setup `kubectl` for use with VMs
 vagrant ssh master -c "sudo cp /etc/kubernetes/admin.conf /vagrant"
-echo "KUBECONFIG=`pwd`/admin.conf" >> ~/.bashrc && export "KUBECONFIG=`pwd`/admin.conf"
+echo "export KUBECONFIG=`pwd`/admin.conf" >> ~/.bashrc && export "KUBECONFIG=`pwd`/admin.conf"
 kubectl get nodes
 ```
 
