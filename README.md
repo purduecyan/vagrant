@@ -7,10 +7,6 @@ To install Vagrant on an Ubuntu machine with VirtualBox as the provider, run:
 ```shell
 sudo apt update
 sudo apt install virtualbox virtualbox-guest-additions-iso vagrant
-
-# Allow the network 172.42.42.0/24 for your VirtualBox machines
-sudo mkdir /etc/vbox
-sudo echo "* 172.42.42.0/24" >> /etc/vbox/networks.conf
 ```
 
 ### Install and configure `kubectl`
@@ -36,6 +32,11 @@ git clone https://github.com/purduecyan/vagrant.git
 Navigate to the desired folder to create the necessary VMs. For example:
 ```shell
 cd vagrant/kubernetes
+```
+Allow the network `172.42.42.0/24` for your VirtualBox machines
+```shell
+sudo mkdir /etc/vbox
+sudo echo "* 172.42.42.0/24" >> /etc/vbox/networks.conf
 ```
 Bring up the VMs using
 ```shell
