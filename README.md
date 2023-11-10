@@ -6,7 +6,11 @@ This repository provides Vagrant resources various projects.
 To install Vagrant on an Ubuntu machine with VirtualBox as the provider, run:
 ```shell
 sudo apt update
-sudo apt install virtualbox virtualbox-guest-additions-iso vagrant 
+sudo apt install virtualbox virtualbox-guest-additions-iso vagrant
+
+# Allow the network 172.42.42.0/24 for your VirtualBox machines
+sudo mkdir /etc/vbox
+sudo echo "* 172.42.42.0/24" >> /etc/vbox/networks.conf
 ```
 
 ### Clone the repository
