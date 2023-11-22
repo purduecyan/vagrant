@@ -60,3 +60,4 @@ cat >>/etc/hosts<<EOF
 172.42.42.101   worker1.example.com    worker1
 172.42.42.102   worker2.example.com    worker2
 EOF
+

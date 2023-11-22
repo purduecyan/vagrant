@@ -22,5 +22,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 
 
+
+
 echo "[TASK 5] Generate and save cluster join command to /joincluster.sh"
 kubeadm token create --print-join-command > /joincluster.sh 2>/dev/null
