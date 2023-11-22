@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 echo "[TASK 1] Pull required containers"
 kubeadm config images pull >/dev/null 2>&1
 
@@ -21,6 +19,8 @@ sudo chown -R vagrant:vagrant /home/vagrant/.kube
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
 
 
 
