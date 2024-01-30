@@ -1,0 +1,51 @@
+#cloud-config
+package_update: true
+packages:
+  - zip
+  - bison
+  - build-essential
+  - cmake
+  - flex
+  - git
+  - libedit-dev 
+  - libllvm14
+  - llvm-14-dev
+  - libclang-14-dev 
+  - python3
+  - zlib1g-dev
+  - libelf-dev
+  - libfl-dev
+  - python3-setuptools
+  - liblzma-dev
+  - libdebuginfod-dev
+  - arping
+  - netperf
+  - iperf
+  - python-is-python3
+  - linux-headers-5.15.0-91-generic
+  - bpftrace
+
+runcmd:
+  - cd /root
+  - export HOME=/root
+  - export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+  - git clone https://github.com/iovisor/bcc.git
+  - mkdir bcc/build; cd bcc/build
+  - cmake .. -DENABLE_LLVM_SHARED=1
+  - make
+  - sudo make install
+  - cmake -DPYTHON_CMD=python3 ..
+  - pushd src/python/
+  - make
+  - sudo make install
+  - popd 
+  - source /root/.bashrc
+
+write_files:
+- content: |
+      bcctools=/usr/share/bcc/tools
+      bccexamples=/usr/share/bcc/examples
+      export PATH=$bcctools:$bccexamples:$PATH
+  path: /root/.bashrc
+  permissions: '0644'
+  append: true
