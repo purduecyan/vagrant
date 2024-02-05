@@ -22,10 +22,18 @@ packages:
   - netperf
   - iperf
   - python-is-python3
-  - linux-headers-5.15.0-91-generic
+  - clang
+  - llvm
+  - libpcap-dev
+  - libc6-dev-i386
+  - linux-tools-common
+  - linux-tools-generic
+  - libbpf-dev
+  - tcpdump
   - bpftrace
 
 runcmd:
+  - sudo apt install linux-tools-$(uname -r) linux-headers-$(uname -r)
   - cd /root
   - export HOME=/root
   - export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -38,8 +46,12 @@ runcmd:
   - pushd src/python/
   - make
   - sudo make install
-  - popd 
-  - source /root/.bashrc
+  - cd /root
+  - git clone --recurse-submodules https://github.com/xdp-project/xdp-tutorial.git
+  - cd xdp-tutorial/
+  - ./configure
+  - make
+
 
 write_files:
 - content: |
